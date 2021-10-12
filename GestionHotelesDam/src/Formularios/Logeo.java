@@ -17,6 +17,8 @@ import javax.swing.border.EmptyBorder;
 
 import Mantenimiento.gestionUsuario;
 import bean.Usuario;
+import javax.swing.UIManager;
+import java.awt.SystemColor;
 
 public class Logeo extends JFrame {
 
@@ -64,23 +66,23 @@ public class Logeo extends JFrame {
 		JLabel lbUsuario = new JLabel("Usuario : ");
 		lbUsuario.setForeground(Color.WHITE);
 		lbUsuario.setFont(new Font("Segoe UI Historic", Font.PLAIN, 13));
-		lbUsuario.setBounds(91, 75, 84, 27);
+		lbUsuario.setBounds(31, 75, 72, 27);
 		contentPane.add(lbUsuario);
 		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(168, 79, 158, 20);
+		txtUsuario.setBounds(102, 79, 158, 20);
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		JLabel lbClave = new JLabel("Clave :");
 		lbClave.setForeground(Color.WHITE);
 		lbClave.setFont(new Font("Segoe UI Historic", Font.PLAIN, 13));
-		lbClave.setBounds(70, 137, 84, 27);
+		lbClave.setBounds(40, 137, 63, 27);
 		contentPane.add(lbClave);
 		
 		txtClave = new JPasswordField();
 		txtClave.setColumns(10);
-		txtClave.setBounds(168, 141, 158, 20);
+		txtClave.setBounds(102, 141, 158, 20);
 		contentPane.add(txtClave);
 		
 		JButton btnIngresar = new JButton("INGRESAR");
@@ -91,19 +93,33 @@ public class Logeo extends JFrame {
 			}
 		);
 		btnIngresar.setForeground(Color.BLACK);
-		btnIngresar.setFont(new Font("Segoe UI Historic", Font.BOLD, 13));
-		btnIngresar.setBackground(Color.DARK_GRAY);
-		btnIngresar.setBounds(70, 196, 107, 38);
+		btnIngresar.setFont(new Font("Segoe UI Historic", Font.PLAIN, 13));
+		btnIngresar.setBackground(UIManager.getColor("Button.background"));
+		btnIngresar.setBounds(31, 202, 119, 27);
 		contentPane.add(btnIngresar);
 		
 		JButton btnSalir = new JButton("SALIR");
+		btnSalir.setFont(new Font("Segoe UI Historic", Font.PLAIN, 11));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				salir();
 			}
 		});
-		btnSalir.setBounds(227, 196, 99, 38);
+		btnSalir.setBounds(316, 203, 91, 27);
 		contentPane.add(btnSalir);
+		
+		JButton btnRegistrarse = new JButton("REGISTRARSE");
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		btnRegistrarse.setForeground(Color.BLACK);
+		btnRegistrarse.setFont(new Font("Segoe UI Historic", Font.PLAIN, 10));
+		btnRegistrarse.setBackground(SystemColor.menu);
+		btnRegistrarse.setBounds(175, 203, 111, 27);
+		contentPane.add(btnRegistrarse);
 	}
 
 	protected void ingresar() {
@@ -128,13 +144,14 @@ public class Logeo extends JFrame {
 			frmBienvenida.setVisible(true);
 			
 		}else {
-			JOptionPane.showMessageDialog(contentPane, "Datos inválidos","ERROR",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(contentPane, "No está registrado","ERROR",JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
 
 	protected void salir() {
 		System.exit(0);
+		
 		
 	}
 }

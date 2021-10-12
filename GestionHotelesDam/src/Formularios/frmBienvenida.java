@@ -41,7 +41,7 @@ public class frmBienvenida extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Bienvenido!");
+		JLabel lblNewLabel = new JLabel("Bienvenido!!!");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblNewLabel.setBounds(142, 67, 141, 59);

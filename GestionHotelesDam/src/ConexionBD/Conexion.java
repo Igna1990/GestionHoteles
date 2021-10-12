@@ -15,7 +15,7 @@ public class Conexion {
 		Connection con = null;
 		try {
 			con = DriverManager.getConnection(URL, USUARIO, CLAVE);
-			System.out.println("CONNECT");
+			System.out.println("CONNECT OK");
 			
 
 		} catch (SQLException e) {

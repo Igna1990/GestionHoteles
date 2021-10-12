@@ -24,6 +24,7 @@ public class Usuario {
 		this.fecha_nac = fecha_nac;
 	}
 
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -86,6 +87,12 @@ public class Usuario {
 
 	public void setFecha_nac(Date fecha_nac) {
 		this.fecha_nac = fecha_nac;
+	}
+	@Override
+	public String toString() {
+		return "Usuario [usuario=" + usuario + ", clave=" + clave + ", apellidos=" + apellidos + ", dni=" + dni
+				+ ", imagen=" + imagen + ", poblacion=" + poblacion + ", roll=" + roll + ", fecha_nac=" + fecha_nac
+				+ "]";
 	}
 
 }
