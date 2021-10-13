@@ -1,17 +1,20 @@
 package Formularios;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import Mantenimiento.gestionRegistro;
+import bean.Usuario;
 
 public class frmRegistroCliente extends JFrame {
 
@@ -113,7 +116,7 @@ public class frmRegistroCliente extends JFrame {
 				registrarse();
 			}
 		});
-		btnNewButton.setBounds(145, 208, 103, 2);
+		btnNewButton.setBounds(128, 208, 120, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnSalir = new JButton("SALIR");
@@ -130,12 +133,34 @@ public class frmRegistroCliente extends JFrame {
 
 	protected void registrarse() {
 		
+		gestionRegistro regCli = new gestionRegistro(); 
+		Usuario usuario2 = new Usuario();
+		
 		String usuario = txtNombre.getText();
 		String apellidos = txtApellidos.getText();
 		String dni = txtDni.getText();
 		String clave = String.valueOf(pssClave.getPassword());
+		String fecha_nac = txtFecha.getText();
+		String imagen = txtFoto.getText();
 		
 		
+		usuario2.setUsuario(usuario);
+		usuario2.setApellidos(apellidos);
+		usuario2.setDni(dni);
+		usuario2.setClave(clave);
+		usuario2.setFecha_nac(fecha_nac);
+		usuario2.setImagen(imagen);
+		usuario2.setRoll("cliente");
+		
+		
+		
+		if(regCli.registrarUsuario(usuario2)) {
+			JOptionPane.showMessageDialog(contentPane, "REGISTRADO");
+			this.dispose();
+		}
+		else {
+			JOptionPane.showMessageDialog(contentPane, "Error al registrarse");
+		}
 		
 	}
 }

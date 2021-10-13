@@ -4,26 +4,24 @@ import java.util.Date;
 
 public class Usuario {
 	
-	private String usuario,clave,apellidos,dni,imagen,poblacion,roll;
-	private Date fecha_nac;
-	
+	private String usuario,clave,apellidos,dni,imagen,fecha_nac,poblacion,roll;
+
 	public Usuario() {
 		
 	}
 
-	public Usuario(String usuario, String clave, String apellidos, String dni, String imagen, String poblacion,
-			String roll, Date fecha_nac) {
-
+	public Usuario(String usuario, String clave, String apellidos, String dni, String imagen, String fecha_nac,
+			String poblacion, String roll) {
+		super();
 		this.usuario = usuario;
 		this.clave = clave;
 		this.apellidos = apellidos;
 		this.dni = dni;
 		this.imagen = imagen;
+		this.fecha_nac = fecha_nac;
 		this.poblacion = poblacion;
 		this.roll = roll;
-		this.fecha_nac = fecha_nac;
 	}
-
 
 	public String getUsuario() {
 		return usuario;
@@ -65,6 +63,14 @@ public class Usuario {
 		this.imagen = imagen;
 	}
 
+	public String getFecha_nac() {
+		return fecha_nac;
+	}
+
+	public void setFecha_nac(String fecha_nac) {
+		this.fecha_nac = fecha_nac;
+	}
+
 	public String getPoblacion() {
 		return poblacion;
 	}
@@ -81,18 +87,7 @@ public class Usuario {
 		this.roll = roll;
 	}
 
-	public Date getFecha_nac() {
-		return fecha_nac;
-	}
 
-	public void setFecha_nac(Date fecha_nac) {
-		this.fecha_nac = fecha_nac;
-	}
-	@Override
-	public String toString() {
-		return "Usuario [usuario=" + usuario + ", clave=" + clave + ", apellidos=" + apellidos + ", dni=" + dni
-				+ ", imagen=" + imagen + ", poblacion=" + poblacion + ", roll=" + roll + ", fecha_nac=" + fecha_nac
-				+ "]";
-	}
+
 
 }

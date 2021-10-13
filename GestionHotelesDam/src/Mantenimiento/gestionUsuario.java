@@ -26,7 +26,7 @@ public class gestionUsuario {
 			
 			while(rs.next()) {
 				usuario = new Usuario(rs.getString("usuario"),rs.getString("clave"),rs.getString("apellidos"),
-						rs.getString("dni"),rs.getString("imagen"),rs.getString("poblacion"),rs.getString("roll"),rs.getDate("fecha_nac"));
+						rs.getString("dni"),rs.getString("imagen"),rs.getString("fecha_nac"), rs.getString("poblacion"),rs.getString("roll"));
 			}
 			
 		} catch (Exception e) {
