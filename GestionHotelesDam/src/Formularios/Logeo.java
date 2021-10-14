@@ -140,7 +140,7 @@ public class Logeo extends JFrame {
 			
 			this.dispose();
 			
-			frmBienvenida frmBienvenida = new frmBienvenida();
+			frmRegistroEmpleados frmBienvenida = new frmRegistroEmpleados();
 			frmBienvenida.setVisible(true);
 			
 		}else {

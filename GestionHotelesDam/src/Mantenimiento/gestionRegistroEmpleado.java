@@ -30,6 +30,7 @@ public class gestionRegistroEmpleado extends Conexion {
 			
 			stm.executeUpdate();
 			
+			
 			return true;
 			
 		} catch (Exception e) {
@@ -39,4 +40,7 @@ public class gestionRegistroEmpleado extends Conexion {
 		}
 		
 	}
+	
+	
+	
 }
