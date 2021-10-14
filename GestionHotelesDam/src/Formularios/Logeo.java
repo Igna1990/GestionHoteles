@@ -140,8 +140,16 @@ public class Logeo extends JFrame {
 			
 			this.dispose();
 			
-			frmRegistroEmpleados frmBienvenida = new frmRegistroEmpleados();
-			frmBienvenida.setVisible(true);
+			if(usu.getRoll().equals("cliente")) {
+				
+				frmCliente cliente = new frmCliente(usu);
+				cliente.setVisible(true);
+			}
+			if(usu.getRoll().equals("admin")) {
+				
+				frmRegistroEmpleados admin = new frmRegistroEmpleados();
+				admin.setVisible(true);
+			}
 			
 		}else {
 			JOptionPane.showMessageDialog(contentPane, "No está registrado","ERROR",JOptionPane.ERROR_MESSAGE);
