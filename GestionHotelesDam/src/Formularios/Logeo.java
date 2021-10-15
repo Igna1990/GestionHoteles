@@ -111,7 +111,7 @@ public class Logeo extends JFrame {
 		JButton btnRegistrarse = new JButton("REGISTRARSE");
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				registrarse();
 			}
 		});
 		
@@ -121,7 +121,12 @@ public class Logeo extends JFrame {
 		btnRegistrarse.setBounds(175, 203, 111, 27);
 		contentPane.add(btnRegistrarse);
 	}
-
+	protected void registrarse() {
+		
+		frmRegistroCliente RegistroCliente = new frmRegistroCliente();
+		RegistroCliente.setVisible(true);
+		
+	}
 	protected void ingresar() {
 		
 		String usuario = txtUsuario.getText();
