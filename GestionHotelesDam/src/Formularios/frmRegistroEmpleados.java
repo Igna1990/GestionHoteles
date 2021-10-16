@@ -47,7 +47,6 @@ public class frmRegistroEmpleados extends JFrame {
 	private JPasswordField passwordField;
 	private JTextField txtId;
 
-
 	/**
 	 * Create the frame.
 	 */
@@ -101,19 +100,12 @@ public class frmRegistroEmpleados extends JFrame {
 			}
 		});
 		tblEmpleados.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"ID", "Dni", "Usuario", "Apellidos", "Fecha", "Poblacion"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, String.class, String.class, String.class, String.class
-			};
+				new Object[][] { { null, null, null, null, null, null }, { null, null, null, null, null, null },
+						{ null, null, null, null, null, null }, { null, null, null, null, null, null }, },
+				new String[] { "ID", "Dni", "Usuario", "Apellidos", "Fecha", "Poblacion" }) {
+			Class[] columnTypes = new Class[] { Integer.class, String.class, String.class, String.class, String.class,
+					String.class };
+
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
@@ -253,11 +245,17 @@ public class frmRegistroEmpleados extends JFrame {
 					PreparedStatement ps = con.prepareStatement("DELETE FROM usuario WHERE id = ?");
 					ps.setInt(1, id);
 
-					ps.executeUpdate();
-					JOptionPane.showMessageDialog(null, "Registro eliminado");
-					limpiar();
-					cargarTabla();
+					if (JOptionPane.showConfirmDialog(rootPane, "Se eliminará el registro, ¿desea continuar?",
+							"Eliminar Registro", JOptionPane.WARNING_MESSAGE,
+							JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
+						JOptionPane.showMessageDialog(null, "Registro eliminado");
+						ps.executeUpdate();
+
+						limpiar();
+						cargarTabla();
+
+					}
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, e.toString());
 				}
