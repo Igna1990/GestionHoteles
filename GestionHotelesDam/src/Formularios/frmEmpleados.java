@@ -16,32 +16,42 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
+
+import ConexionBD.Conexion;
 import Mantenimiento.gestionHoteles;
 import Mantenimiento.gestionRegistroEmpleado;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class frmEmpleados extends JFrame {
 	private JTable table;
-	private JTable table_1;
+	private JTable tblHoteles;
 	private JTextField txtNombre;
 	private JTextField txtCiudad;
 	private JTextField txtDireccion;
 	private JTextField txtTelefono;
 	private JTextField txtDescripcion;
-	
+	private JTextField txtId;
+
 	/**
 	 * Launch the application.
 	 */
-	
-	
+
 //	public static void main(String[] args) {
 //		EventQueue.invokeLater(new Runnable() {
 //			public void run() {
@@ -59,7 +69,9 @@ public class frmEmpleados extends JFrame {
 	 * Create the frame.
 	 */
 	public frmEmpleados(Usuario usu) {
+		getContentPane().setBackground(new Color(51, 102, 204));
 		JFrame frame = new JFrame();
+		setTitle("Panel empleados");
 		frame.setBounds(100, 100, 724, 492);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 973, 467);
@@ -74,7 +86,7 @@ public class frmEmpleados extends JFrame {
 		panel.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(61, 26, 625, 69);
+		scrollPane.setBounds(61, 26, 625, 44);
 		panel.add(scrollPane);
 
 		table = new JTable();
@@ -107,7 +119,7 @@ public class frmEmpleados extends JFrame {
 				visualizarEmpleado(usu);
 			}
 		});
-		btnIngresarDatos.setBounds(282, 128, 131, 21);
+		btnIngresarDatos.setBounds(285, 91, 131, 21);
 		panel.add(btnIngresarDatos);
 
 		JPanel panel_1 = new JPanel();
@@ -123,17 +135,68 @@ public class frmEmpleados extends JFrame {
 		scrollPane_1.setBounds(20, 64, 423, 199);
 		panel_1.add(scrollPane_1);
 
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null }, { null, null, null, null, null }, },
-				new String[] { "Nombre", "Ciudad", "Direccion", "Telefono", "Descripcion" }) {
-			Class[] columnTypes = new Class[] { String.class, String.class, String.class, Integer.class, String.class };
+		tblHoteles = new JTable();
+		tblHoteles.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 
+				try {
+
+					int fila = tblHoteles.getSelectedRow();
+					int id = Integer.parseInt(tblHoteles.getValueAt(fila, 0).toString());
+
+					PreparedStatement ps;
+					ResultSet rs;
+					Connection con = Conexion.conectar();
+
+					ps = con.prepareStatement(
+							"SELECT nombre, descripcion, ciudad, direccion, telefono FROM hoteles WHERE id = ?");
+
+					ps.setInt(1, id);
+
+					rs = ps.executeQuery();
+
+					while (rs.next()) {
+						txtId.setText(String.valueOf(id));
+						txtNombre.setText(rs.getString("nombre"));
+						txtCiudad.setText(rs.getString("ciudad"));
+						txtDireccion.setText(rs.getString("direccion"));
+						txtTelefono.setText(rs.getString("telefono"));
+						txtDescripcion.setText(rs.getString("descripcion"));
+
+					}
+
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, e.toString());
+				}
+
+			}
+		});
+
+		tblHoteles.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"Id", "Nombre", "Ciudad", "Direccion", "Telefono", "Descripcion"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, String.class, String.class, String.class, String.class
+			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 		});
-		scrollPane_1.setViewportView(table_1);
+		tblHoteles.getColumnModel().getColumn(0).setPreferredWidth(23);
+		tblHoteles.getColumnModel().getColumn(1).setPreferredWidth(56);
+		tblHoteles.getColumnModel().getColumn(2).setPreferredWidth(54);
+		tblHoteles.getColumnModel().getColumn(3).setPreferredWidth(72);
+		tblHoteles.getColumnModel().getColumn(4).setPreferredWidth(56);
+		tblHoteles.getColumnModel().getColumn(5).setPreferredWidth(107);
+		scrollPane_1.setViewportView(tblHoteles);
+		cargarTabla();
 
 		JLabel lblNombre = new JLabel("Nombre del hotel");
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -190,24 +253,89 @@ public class frmEmpleados extends JFrame {
 		panel_1.add(btnGuardar);
 
 		JButton btnModificar = new JButton("Modificar");
+
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				int id = Integer.parseInt(txtId.getText());
+				String nombre = txtNombre.getText();
+				String descripcion = txtDescripcion.getText();
+				String ciudad = txtCiudad.getText();
+				String direccion = txtDireccion.getText();
+				String telefono = txtTelefono.getText();
+
+				try {
+					Connection con = Conexion.conectar();
+					PreparedStatement ps = con.prepareStatement(
+							"UPDATE hoteles SET nombre=?, descripcion=?, ciudad=?, direccion=?, telefono=? WHERE id = ?");
+					ps.setString(1, nombre);
+					ps.setString(2, descripcion);
+					ps.setString(3, ciudad);
+					ps.setString(4, direccion);
+					ps.setString(5, telefono);
+					ps.setInt(6, id);
+					ps.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Registro modificado");
+					limpiar();
+					cargarTabla();
+
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, e.toString());
+				}
+
+			}
+		});
+
 		btnModificar.setBounds(154, 273, 102, 22);
 		panel_1.add(btnModificar);
 
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(277, 273, 116, 22);
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				int id = Integer.parseInt(txtId.getText());
+
+				try {
+					Connection con = Conexion.conectar();
+					PreparedStatement ps = con.prepareStatement("DELETE FROM hoteles WHERE id = ?");
+					ps.setInt(1, id);
+
+					if (JOptionPane.showConfirmDialog(rootPane, "Se eliminará el registro, ¿desea continuar?",
+							"Eliminar Registro", JOptionPane.WARNING_MESSAGE,
+							JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+						JOptionPane.showMessageDialog(null, "Hotel eliminado");
+						ps.executeUpdate();
+
+						limpiar();
+						cargarTabla();
+
+					}
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, e.toString());
+				}
+
+			}
+		});
 		panel_1.add(btnEliminar);
-		
+
 		txtDescripcion = new JTextField();
 		txtDescripcion.setBounds(453, 244, 275, 51);
 		panel_1.add(txtDescripcion);
 		txtDescripcion.setColumns(10);
-		
+
+		txtId = new JTextField();
+		txtId.setVisible(false);
+		getContentPane().add(txtId);
+		txtId.setColumns(10);
 
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Habitaciones", null, panel_2, null);
 
 		JPanel panel_3 = new JPanel();
 		tabbedPane.addTab("Comentarios", null, panel_3, null);
+
 	}
 
 	protected void visualizarEmpleado(Usuario usu) {
@@ -247,11 +375,52 @@ public class frmEmpleados extends JFrame {
 
 		if (regHotel.registrarHotel(hotel)) {
 			JOptionPane.showMessageDialog(getContentPane(), "REGISTRADO");
+			limpiar();
+			cargarTabla();
 
 		} else {
 			JOptionPane.showMessageDialog(getContentPane(), "Error al registrarse");
 		}
 
+	}
+
+	private void cargarTabla() {
+
+		DefaultTableModel modeloTabla = (DefaultTableModel) tblHoteles.getModel();
+		modeloTabla.setRowCount(0);
+		PreparedStatement ps;
+		ResultSet rs;
+		ResultSetMetaData rsmd;
+		int columnas;
+
+		try {
+			Connection con = Conexion.conectar();
+			ps = con.prepareStatement("SELECT id, nombre, descripcion, ciudad, direccion, telefono FROM hoteles");
+			rs = ps.executeQuery();
+			rsmd = (ResultSetMetaData) rs.getMetaData();
+			columnas = rsmd.getColumnCount();
+
+			while (rs.next()) {
+				Object[] fila = new Object[columnas];
+
+				for (int indice = 0; indice < columnas; indice++) {
+					fila[indice] = rs.getObject(indice + 1);
+				}
+				modeloTabla.addRow(fila);
+			}
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e.toString());
+		}
+
+	}
+
+	private void limpiar() {
+		txtNombre.setText("");
+		txtCiudad.setText("");
+		txtDireccion.setText("");
+		txtTelefono.setText("");
+		txtDescripcion.setText("");
 	}
 
 }
