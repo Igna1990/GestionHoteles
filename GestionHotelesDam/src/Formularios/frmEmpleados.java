@@ -47,6 +47,10 @@ public class frmEmpleados extends JFrame {
 	private JTextField txtTelefono;
 	private JTextField txtDescripcion;
 	private JTextField txtId;
+	private JTable table_1;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -332,6 +336,83 @@ public class frmEmpleados extends JFrame {
 
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Habitaciones", null, panel_2, null);
+		panel_2.setLayout(null);
+		
+		JLabel lblHabitaciones = new JLabel("Habitaciones");
+		lblHabitaciones.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblHabitaciones.setBounds(10, 24, 140, 27);
+		panel_2.add(lblHabitaciones);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(20, 61, 256, 131);
+		panel_2.add(scrollPane_2);
+		
+		table_1 = new JTable();
+		table_1.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"Id", "N\u00BA habitacion", "Tipo habitacion", "Precio"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		scrollPane_2.setViewportView(table_1);
+		
+		JLabel lblNhabitacion = new JLabel("N\u00BA habitacion");
+		lblNhabitacion.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNhabitacion.setBounds(299, 59, 108, 27);
+		panel_2.add(lblNhabitacion);
+		
+		JLabel lblTipo = new JLabel("Tipo habitacion");
+		lblTipo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblTipo.setBounds(299, 103, 125, 27);
+		panel_2.add(lblTipo);
+		
+		JLabel lblPrecio = new JLabel("Precio");
+		lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPrecio.setBounds(337, 151, 70, 27);
+		panel_2.add(lblPrecio);
+		
+		textField = new JTextField();
+		textField.setBounds(427, 65, 210, 19);
+		panel_2.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(427, 109, 210, 19);
+		panel_2.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(427, 157, 210, 19);
+		panel_2.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JButton btnGuardar1 = new JButton("Guardar");
+		btnGuardar1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnGuardar1.setHorizontalAlignment(SwingConstants.LEFT);
+		btnGuardar1.setBounds(299, 212, 108, 27);
+		panel_2.add(btnGuardar1);
+		
+		JButton btnModificar1 = new JButton("Modificar");
+		btnModificar1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnModificar1.setHorizontalAlignment(SwingConstants.LEFT);
+		btnModificar1.setBounds(427, 212, 108, 27);
+		panel_2.add(btnModificar1);
+		
+		JButton btnEliminar1 = new JButton("Eliminar");
+		btnEliminar1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnEliminar1.setBounds(565, 212, 108, 27);
+		panel_2.add(btnEliminar1);
 
 		JPanel panel_3 = new JPanel();
 		tabbedPane.addTab("Comentarios", null, panel_3, null);
