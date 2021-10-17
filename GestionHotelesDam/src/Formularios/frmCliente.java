@@ -8,13 +8,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import bean.Usuario;
-import javax.swing.JScrollPane;
 
 public class frmCliente extends JFrame {
 
@@ -57,6 +57,11 @@ public class frmCliente extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton = new JButton("Reservar habitacion");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				reservar();
+			}
+		});
 		btnNewButton.setBounds(35, 78, 143, 23);
 		contentPane.add(btnNewButton);
 		
@@ -69,6 +74,11 @@ public class frmCliente extends JFrame {
 		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Valorar Hoteles");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				valorar(usu);
+			}
+		});
 		btnNewButton_4.setBounds(305, 112, 143, 23);
 		contentPane.add(btnNewButton_4);
 		
@@ -87,13 +97,24 @@ public class frmCliente extends JFrame {
 		scrollPane.setViewportView(table);
 	}
 
-	protected void actualizar(Usuario usu) {
-
+	protected void reservar() {
+		
+		frmReservaHab reserv = new frmReservaHab();
+		reserv.setVisible(true);
 		
 	}
 
-	protected void visualizarCliente(Usuario usu) {
+	protected void valorar(Usuario usu) {
 		
+	}
+
+	protected void actualizar(Usuario usu) {
+		
+		frmActualizarCliente actualizar = new frmActualizarCliente(usu);
+		actualizar.setVisible(true);
+	}
+
+	protected void visualizarCliente(Usuario usu) {
 		
 		DefaultTableModel tabla2 = (DefaultTableModel) table.getModel();
 		

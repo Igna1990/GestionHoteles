@@ -26,25 +26,6 @@ public class frmRegistroCliente extends JFrame {
 	private JTextField txtFecha;
 	private JPasswordField pssClave;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frmRegistroCliente frame = new frmRegistroCliente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public frmRegistroCliente() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -151,8 +132,6 @@ public class frmRegistroCliente extends JFrame {
 		usuario2.setFecha_nac(fecha_nac);
 		usuario2.setImagen(imagen);
 		usuario2.setRoll("cliente");
-		
-		
 		
 		if(regCli.registrarUsuario(usuario2)) {
 			JOptionPane.showMessageDialog(contentPane, "REGISTRADO");

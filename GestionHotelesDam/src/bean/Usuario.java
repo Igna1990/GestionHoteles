@@ -5,13 +5,14 @@ import java.util.Date;
 public class Usuario {
 	
 	private String usuario,clave,apellidos,dni,imagen,fecha_nac,poblacion,roll;
-
+	private int id;
+	
 	public Usuario() {
 		
 	}
 
 	public Usuario(String usuario, String clave, String apellidos, String dni, String imagen, String fecha_nac,
-			String poblacion, String roll) {
+			String poblacion, String roll, int id) {
 		super();
 		this.usuario = usuario;
 		this.clave = clave;
@@ -21,6 +22,15 @@ public class Usuario {
 		this.fecha_nac = fecha_nac;
 		this.poblacion = poblacion;
 		this.roll = roll;
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getUsuario() {
