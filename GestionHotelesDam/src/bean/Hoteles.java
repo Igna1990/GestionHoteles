@@ -3,18 +3,20 @@ package bean;
 public class Hoteles {
 
 	private String nombre, descripcion, ciudad, direccion, telefono;
+	private int id;
 
 	public Hoteles() {
 
 	}
 
-	public Hoteles(String nombre, String descripcion, String ciudad, String direccion, String telefono) {
+	public Hoteles(String nombre, String descripcion, String ciudad, String direccion, String telefono,int id) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.ciudad = ciudad;
 		this.direccion = direccion;
 		this.telefono = telefono;
+		this.id = id;
 
 	}
 
@@ -57,11 +59,21 @@ public class Hoteles {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	@Override
 	public String toString() {
 		return "Hoteles [nombre=" + nombre + ", descripcion=" + descripcion + ", ciudad=" + ciudad + ", direccion="
 				+ direccion + ", telefono=" + telefono + "]";
 	}
+
 
 }

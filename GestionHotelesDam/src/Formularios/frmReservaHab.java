@@ -13,8 +13,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.toedter.calendar.JDateChooser;
+
 import Mantenimiento.gestionReservas;
-import javax.swing.JList;
+import bean.Hoteles;
 
 public class frmReservaHab extends JFrame {
 
@@ -22,7 +24,7 @@ public class frmReservaHab extends JFrame {
 	private JTextField textField;
 	private String nombreHotel;
 	private String tipo;
-	private int idHotel;
+	private int idHotel,id;
 
 	public frmReservaHab() {
 		
@@ -38,14 +40,7 @@ public class frmReservaHab extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JComboBox cmBxHoteles = new JComboBox();
-		cmBxHoteles.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				nombreHotel = cmBxHoteles.getSelectedItem().toString();
-				System.out.println(nombreHotel);
-			}
-		});
-		gestionReservas gtHab = new gestionReservas();
-		idHotel = gtHab.identHotel(nombreHotel);
+		nombreHotel = cmBxHoteles.getSelectedItem().toString();
 		gestionReservas cmHtl = new gestionReservas();
 		cmHtl.comboxHoteles(cmBxHoteles);
 		cmBxHoteles.setBounds(84, 62, 89, 22);
@@ -68,6 +63,12 @@ public class frmReservaHab extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JComboBox cbxHab = new JComboBox();
+		cbxHab.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gestionReservas gtHab = new gestionReservas();
+				idHotel = gtHab.identHotel(nombreHotel);
+			}
+		});
 		gestionReservas reserva = new gestionReservas();
 		reserva.comboxHab(cbxHab, idHotel);
 		cbxHab.setBounds(84, 155, 89, 22);
@@ -108,6 +109,16 @@ public class frmReservaHab extends JFrame {
 		JLabel lblNewLabel_4_1_1_1 = new JLabel("Hasta:");
 		lblNewLabel_4_1_1_1.setBounds(268, 115, 46, 14);
 		contentPane.add(lblNewLabel_4_1_1_1);
+		
+		JDateChooser dtDesde = new JDateChooser();
+		String fecha1 = ((JTextField)dtDesde.getDateEditor().getUiComponent()).getText();
+		dtDesde.setBounds(307, 77, 98, 20);
+		contentPane.add(dtDesde);
+		
+		JDateChooser dtHasta = new JDateChooser();
+		String fecha2 = ((JTextField)dtHasta.getDateEditor().getUiComponent()).getText();
+		dtHasta.setBounds(307, 113, 98, 20);
+		contentPane.add(dtHasta);
 		
 
 	}

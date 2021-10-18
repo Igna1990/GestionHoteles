@@ -9,13 +9,16 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import ConexionBD.Conexion;
+import bean.Hoteles;
 
 public class gestionReservas {
 	
-	PreparedStatement  stm = null; 
-	Connection con = Conexion.conectar();
+
 	
 	public void comboxHoteles(JComboBox cbxHotel) {
+		
+		PreparedStatement  stm = null; 
+		Connection con = Conexion.conectar();
 		
 		String sql = "SELECT nombre FROM hoteles";
 		
@@ -37,25 +40,36 @@ public class gestionReservas {
 	}
 	
 	public int identHotel(String nombreHotel) {
+		
+		PreparedStatement  stm = null; 
+		Connection con = Conexion.conectar();
+		
 		int id = 0;
 		
 		String sql = "SELECT id FROM hoteles WHERE nombre = ? ";
 		
-		try {
-			stm = con.prepareStatement(sql);
-			stm.setString(1, nombreHotel);
-			ResultSet rs = stm.executeQuery();
-			while(rs.next()) {
-				id = rs.getInt("id");
-			}
-		}catch (Exception e) {
-			System.out.println("No se recuperó el ID");
-			
+		 try {
+				 stm = con.prepareStatement(sql);
+		         stm.setString(1,nombreHotel);
+		         ResultSet rs = stm.executeQuery();
+
+		        if (rs.next()) {
+		            id = rs.getInt("id_hotel");
+		        }
+
+		    } catch (SQLException e) {
+		        
+		    	System.out.println("Error");
+		    }
+		    return id;
 		}
-		return id;
 		
-	}
-	public void comboxHab(JComboBox cbxHab, int idHotel) {
+	
+	
+	public void comboxHab(JComboBox cbxHab,int idHotel) {
+		
+		PreparedStatement  stm = null; 
+		Connection con = Conexion.conectar();
 		
 		String sql = "SELECT num_hab FROM habitaciones WHERE id_hotel = ?";
 		
