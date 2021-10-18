@@ -51,7 +51,8 @@ public class frmEmpleados extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-
+	private JTable tablaComentarios;
+	private JTextField hotelFiltro;
 	/**
 	 * Launch the application.
 	 */
@@ -178,17 +179,11 @@ public class frmEmpleados extends JFrame {
 		});
 
 		tblHoteles.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"Id", "Nombre", "Ciudad", "Direccion", "Telefono", "Descripcion"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, String.class, String.class, String.class, String.class
-			};
+				new Object[][] { { null, null, null, null, null, null }, { null, null, null, null, null, null }, },
+				new String[] { "Id", "Nombre", "Ciudad", "Direccion", "Telefono", "Descripcion" }) {
+			Class[] columnTypes = new Class[] { Integer.class, String.class, String.class, String.class, String.class,
+					String.class };
+
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
@@ -337,78 +332,70 @@ public class frmEmpleados extends JFrame {
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Habitaciones", null, panel_2, null);
 		panel_2.setLayout(null);
-		
+
 		JLabel lblHabitaciones = new JLabel("Habitaciones");
 		lblHabitaciones.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblHabitaciones.setBounds(10, 24, 140, 27);
 		panel_2.add(lblHabitaciones);
-		
+
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(20, 61, 256, 131);
 		panel_2.add(scrollPane_2);
-		
+
 		table_1 = new JTable();
 		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"Id", "N\u00BA habitacion", "Tipo habitacion", "Precio"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, String.class, String.class
-			};
+				new Object[][] { { null, null, null, null }, { null, null, null, null }, { null, null, null, null }, },
+				new String[] { "Id", "N\u00BA habitacion", "Tipo habitacion", "Precio" }) {
+			Class[] columnTypes = new Class[] { Integer.class, String.class, String.class, String.class };
+
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 		});
 		scrollPane_2.setViewportView(table_1);
-		
+
 		JLabel lblNhabitacion = new JLabel("N\u00BA habitacion");
 		lblNhabitacion.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNhabitacion.setBounds(299, 59, 108, 27);
 		panel_2.add(lblNhabitacion);
-		
+
 		JLabel lblTipo = new JLabel("Tipo habitacion");
 		lblTipo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblTipo.setBounds(299, 103, 125, 27);
 		panel_2.add(lblTipo);
-		
+
 		JLabel lblPrecio = new JLabel("Precio");
 		lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblPrecio.setBounds(337, 151, 70, 27);
 		panel_2.add(lblPrecio);
-		
+
 		textField = new JTextField();
 		textField.setBounds(427, 65, 210, 19);
 		panel_2.add(textField);
 		textField.setColumns(10);
-		
+
 		textField_1 = new JTextField();
 		textField_1.setBounds(427, 109, 210, 19);
 		panel_2.add(textField_1);
 		textField_1.setColumns(10);
-		
+
 		textField_2 = new JTextField();
 		textField_2.setBounds(427, 157, 210, 19);
 		panel_2.add(textField_2);
 		textField_2.setColumns(10);
-		
+
 		JButton btnGuardar1 = new JButton("Guardar");
 		btnGuardar1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnGuardar1.setHorizontalAlignment(SwingConstants.LEFT);
 		btnGuardar1.setBounds(299, 212, 108, 27);
 		panel_2.add(btnGuardar1);
-		
+
 		JButton btnModificar1 = new JButton("Modificar");
 		btnModificar1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnModificar1.setHorizontalAlignment(SwingConstants.LEFT);
-		btnModificar1.setBounds(427, 212, 108, 27);
+		btnModificar1.setBounds(427, 212, 118, 27);
 		panel_2.add(btnModificar1);
-		
+
 		JButton btnEliminar1 = new JButton("Eliminar");
 		btnEliminar1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnEliminar1.setBounds(565, 212, 108, 27);
@@ -416,8 +403,104 @@ public class frmEmpleados extends JFrame {
 
 		JPanel panel_3 = new JPanel();
 		tabbedPane.addTab("Comentarios", null, panel_3, null);
+		panel_3.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("Comentarios sobre los Hoteles");
+		lblNewLabel.setBounds(10, 37, 291, 13);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		panel_3.add(lblNewLabel);
+
+		JButton botonFiltrar = new JButton("Filtrar por hotel");
+		botonFiltrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String hotel = hotelFiltro.getText();
+				filtrarHotel(hotel);
+			}
+		});
+		botonFiltrar.setBounds(407, 134, 205, 21);
+		botonFiltrar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		panel_3.add(botonFiltrar);
+
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(10, 65, 325, 159);
+		panel_3.add(scrollPane_3);
+
+		tablaComentarios = new JTable();
+		tablaComentarios.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Hotel", "Comentario" }));
+		tablaComentarios.getColumnModel().getColumn(1).setPreferredWidth(235);
+		scrollPane_3.setViewportView(tablaComentarios);
+
+		hotelFiltro = new JTextField();
+		hotelFiltro.setBounds(377, 105, 272, 19);
+		panel_3.add(hotelFiltro);
+		hotelFiltro.setColumns(10);
+
+		cargarTabla();
+		cargarComentarios();
 
 	}
+
+	private void cargarComentarios() {
+		DefaultTableModel modeloTabla = (DefaultTableModel) tablaComentarios.getModel();
+		modeloTabla.setRowCount(0);
+		PreparedStatement ps;
+		ResultSet rs;
+		ResultSetMetaData rsmd;
+		int columnas;
+
+		try {
+			Connection con = Conexion.conectar();
+			ps = con.prepareStatement("SELECT * FROM comentarios");
+			rs = ps.executeQuery();
+			rsmd = (ResultSetMetaData) rs.getMetaData();
+			columnas = rsmd.getColumnCount();
+
+			while (rs.next()) {
+				Object[] fila = new Object[columnas];
+
+				for (int indice = 0; indice < columnas; indice++) {
+					fila[indice] = rs.getObject(indice + 1);
+				}
+				modeloTabla.addRow(fila);
+			}
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e.toString());
+		}
+	}
+	
+	private void filtrarHotel(String hotel) {
+		DefaultTableModel modeloTabla = (DefaultTableModel) tablaComentarios.getModel();
+		modeloTabla.setRowCount(0);
+		PreparedStatement ps;
+		ResultSet rs;
+		ResultSetMetaData rsmd;
+		int columnas;
+		
+		try {
+			Connection con = Conexion.conectar();
+			ps = con.prepareStatement("SELECT * FROM comentarios WHERE nombre_hotel = ?");
+			ps.setString(1, hotel);
+			rs = ps.executeQuery();
+			rsmd = (ResultSetMetaData) rs.getMetaData();
+			columnas = rsmd.getColumnCount();
+
+			while (rs.next()) {
+				Object[] fila = new Object[columnas];
+
+				for (int indice = 0; indice < columnas; indice++) {
+					fila[indice] = rs.getObject(indice + 1);
+				}
+				modeloTabla.addRow(fila);
+			}
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e.toString());
+		}
+		
+	}
+	
 
 	protected void visualizarEmpleado(Usuario usu) {
 
