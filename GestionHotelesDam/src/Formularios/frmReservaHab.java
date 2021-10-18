@@ -17,6 +17,7 @@ import com.toedter.calendar.JDateChooser;
 
 import Mantenimiento.gestionReservas;
 import bean.Hoteles;
+import java.awt.Color;
 
 public class frmReservaHab extends JFrame {
 
@@ -31,6 +32,7 @@ public class frmReservaHab extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 284);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 128, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -75,12 +77,12 @@ public class frmReservaHab extends JFrame {
 		contentPane.add(cbxHab);
 
 		
-		JButton btnNewButton = new JButton("Reservar");
-		btnNewButton.setBounds(163, 211, 89, 23);
+		JButton btnNewButton = new JButton("RESERVAR");
+		btnNewButton.setBounds(176, 199, 98, 35);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel_2 = new JLabel("RESERVAS");
-		lblNewLabel_2.setFont(new Font("Segoe UI Historic", Font.PLAIN, 13));
+		lblNewLabel_2.setFont(new Font("Segoe UI Historic", Font.BOLD, 13));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(142, 11, 151, 33);
 		contentPane.add(lblNewLabel_2);

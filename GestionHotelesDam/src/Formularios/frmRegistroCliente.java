@@ -15,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 
 import Mantenimiento.gestionRegistro;
 import bean.Usuario;
+import java.awt.Color;
+import java.awt.Font;
 
 public class frmRegistroCliente extends JFrame {
 
@@ -30,12 +32,14 @@ public class frmRegistroCliente extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 128, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("FORMULARIO DE REGISTRO");
-		lblNewLabel.setBounds(149, 11, 144, 35);
+		lblNewLabel.setFont(new Font("Segoe UI Historic", Font.BOLD, 14));
+		lblNewLabel.setBounds(124, -1, 198, 35);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nombre");

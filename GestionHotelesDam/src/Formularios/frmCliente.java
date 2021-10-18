@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import bean.Usuario;
+import java.awt.Color;
 
 public class frmCliente extends JFrame {
 
@@ -26,14 +27,15 @@ public class frmCliente extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 498, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 128, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Bienvenido");
+		JLabel lblNewLabel = new JLabel("BIENVENIDO");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Segoe UI Historic", Font.BOLD | Font.ITALIC, 14));
-		lblNewLabel.setBounds(99, 11, 216, 22);
+		lblNewLabel.setBounds(125, 11, 216, 22);
 		contentPane.add(lblNewLabel);
 		
 		JButton btnLeer = new JButton("Visualizar datos");

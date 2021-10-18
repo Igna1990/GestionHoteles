@@ -3,6 +3,7 @@ package Formularios;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,15 +14,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import Mantenimiento.gestionUsuario;
 import bean.Usuario;
-import javax.swing.UIManager;
-import java.awt.SystemColor;
 
-public class Logeo extends JFrame {
-
+public class frmLoggin extends JFrame{
 	private JPanel contentPane;
 	private JTextField txtUsuario;
 	private JTextField txtClave;
@@ -34,8 +33,10 @@ public class Logeo extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Logeo frame = new Logeo();
+					frmLoggin frame = new frmLoggin();
+					frame.setSize(400,300);
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,7 +47,7 @@ public class Logeo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Logeo() {
+	public frmLoggin() {
 		setBackground(Color.WHITE);
 		setTitle("LOGIN");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,6 +57,7 @@ public class Logeo extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+	
 
 		JLabel lbLogeo = new JLabel("LOGIN");
 		lbLogeo.setForeground(Color.WHITE);
@@ -98,7 +100,7 @@ public class Logeo extends JFrame {
 		contentPane.add(btnIngresar);
 
 		JButton btnSalir = new JButton("SALIR");
-		btnSalir.setFont(new Font("Segoe UI Historic", Font.PLAIN, 11));
+		btnSalir.setFont(new Font("Segoe UI Historic", Font.PLAIN, 13));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				salir();
@@ -115,7 +117,7 @@ public class Logeo extends JFrame {
 		});
 
 		btnRegistrarse.setForeground(Color.BLACK);
-		btnRegistrarse.setFont(new Font("Segoe UI Historic", Font.PLAIN, 10));
+		btnRegistrarse.setFont(new Font("Segoe UI Historic", Font.PLAIN, 13));
 		btnRegistrarse.setBackground(SystemColor.menu);
 		btnRegistrarse.setBounds(175, 203, 111, 27);
 		contentPane.add(btnRegistrarse);

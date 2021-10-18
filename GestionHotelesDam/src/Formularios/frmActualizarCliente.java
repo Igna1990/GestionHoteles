@@ -14,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 
 import Mantenimiento.gestionUsuario;
 import bean.Usuario;
+import java.awt.Color;
+import java.awt.Font;
 
 public class frmActualizarCliente extends JFrame {
 
@@ -29,12 +31,14 @@ public class frmActualizarCliente extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 128, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lbNombre = new JLabel("Nombre: ");
-		lbNombre.setBounds(66, 47, 46, 14);
+		lbNombre.setFont(new Font("Segoe UI Historic", Font.PLAIN, 11));
+		lbNombre.setBounds(55, 47, 57, 14);
 		contentPane.add(lbNombre);
 		
 		txtNombre = new JTextField();
@@ -43,7 +47,8 @@ public class frmActualizarCliente extends JFrame {
 		txtNombre.setColumns(10);
 		
 		JLabel lblApellidos = new JLabel("Apellidos:");
-		lblApellidos.setBounds(66, 83, 46, 14);
+		lblApellidos.setFont(new Font("Segoe UI Historic", Font.PLAIN, 11));
+		lblApellidos.setBounds(55, 83, 57, 14);
 		contentPane.add(lblApellidos);
 		
 		txtApellidos = new JTextField();
@@ -52,10 +57,12 @@ public class frmActualizarCliente extends JFrame {
 		contentPane.add(txtApellidos);
 		
 		JLabel lbClave = new JLabel("Clave:");
+		lbClave.setFont(new Font("Segoe UI Historic", Font.PLAIN, 11));
 		lbClave.setBounds(236, 47, 46, 14);
 		contentPane.add(lbClave);
 		
 		JLabel lbNombre_1_1 = new JLabel("DNI:");
+		lbNombre_1_1.setFont(new Font("Segoe UI Historic", Font.PLAIN, 11));
 		lbNombre_1_1.setBounds(236, 83, 46, 14);
 		contentPane.add(lbNombre_1_1);
 		
@@ -65,10 +72,12 @@ public class frmActualizarCliente extends JFrame {
 		contentPane.add(txtDni);
 		
 		JLabel lbFecha = new JLabel("Fecha Nacimiento:");
-		lbFecha.setBounds(26, 118, 86, 14);
+		lbFecha.setFont(new Font("Segoe UI Historic", Font.PLAIN, 11));
+		lbFecha.setBounds(10, 118, 102, 14);
 		contentPane.add(lbFecha);
 		
 		JLabel lbFoto = new JLabel("Foto:");
+		lbFoto.setFont(new Font("Segoe UI Historic", Font.PLAIN, 11));
 		lbFoto.setBounds(236, 118, 46, 14);
 		contentPane.add(lbFoto);
 		
@@ -82,7 +91,8 @@ public class frmActualizarCliente extends JFrame {
 		txtFoto.setBounds(281, 115, 86, 20);
 		contentPane.add(txtFoto);
 		
-		JButton btnNewButton = new JButton("Actualizar");
+		JButton btnNewButton = new JButton("ACTUALIZAR");
+		btnNewButton.setFont(new Font("Segoe UI Historic", Font.PLAIN, 13));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actualizar(usu);
